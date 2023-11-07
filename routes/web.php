@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\paqueteController;
+use App\Http\Controllers\rutaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +18,17 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('mapa');
 });
+
+Route::get('/paqueteCamion', function () {
+    return view('paqueteCamion');
+})->name('paqueteCamion');
+
+Route::get('/rutaCamion', function () {
+    return view('rutaCamion');
+})->name('rutaCamion');
+
+Route::get('/PaqueteCamion', [paqueteController::class, 'cargarDatos'])->name('paqueteCamiom.cargarDatos');
+Route::post('/paqueteCamion', [paqueteController::class, 'cambiarEstado'])->name('redireccion.paqueteCamion');
+
+Route::get('/RutaCamion', [rutaController::class, 'cargarDatos'])->name('rutaCamion.cargarDatos');
+Route::post('/rutaCamion', [rutaController::class, 'crearRuta'])->name('redireccion.rutaCamion');

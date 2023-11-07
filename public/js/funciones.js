@@ -1,30 +1,4 @@
-var puntos = [];
-var nombres = [];
-var ruta = [];
-var planRuta = [];
-var point;
-var lastpoint;
-var r = null;
-var ubicacion = null;
-var map;
-var circulo = null;
-var marcador = null;
-var controlBoton = 1;
-var markers = [];
 
-var ico1 = L.icon({
-  iconUrl: "http://localhost:8000/img/Marker1.png",
-  iconSize: [60, 60],
-  iconAnchor: [30, 60],
-  popupAnchor: [-3, -76]
-})
-
-var ico2 = L.icon({
-  iconUrl:"http://localhost:8000/img/Marker2.png",
-  iconSize: [60, 60],
-  iconAnchor: [30, 60],
-  popupAnchor: [-3, -76]
-})
 
 function button() {
   if (puntos.length > 0) {
@@ -51,9 +25,7 @@ function agregarPunto() {
       nombres.push(nombre);
       puntosInput.value = "";
       nombreInput.value = "";
-      if (!map) {
-        crearMapa();
-      }
+
       console.log(coordenadas)
       var mark = L.marker([coordenadas[0], coordenadas[1]], { icon: ico2 }).addTo(map).bindPopup("AHHHHHHHHHHH");
       markers.push(mark);
@@ -88,15 +60,6 @@ function obtenerCheckboxesActivas() {
 
   console.log(nombresCheckboxesActivas);
   calcularRuta(nombresCheckboxesActivas);
-}
-function crearMapa() {
-  if (map == undefined) {
-    var x = "-34.89945,-56.13177";
-    map = L.map("map").setView(puntos[0], 13);
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution: "&copy; OpenStreetMap contributors"
-    }).addTo(map);
-  }
 }
 
 function verificarMapa() {
@@ -217,15 +180,15 @@ function calcularRuta(nombresCheckboxesActivas) {
 }
 
 function crearRuta() {
-  var rutaFinal=[ubicacion];
+  var rutaFinal = [ubicacion];
   console.log('pl' + planRuta)
   planRuta.forEach(function (x) {
-    rutaFinal.push(L.latLng(x[0],x[1]))
+    rutaFinal.push(L.latLng(x[0], x[1]))
   })
   console.log(rutaFinal);
   var routeControl = L.Routing.control({
-    waypoints: 
-     rutaFinal,
+    waypoints:
+      rutaFinal,
     createMarker: function (i, wp, nWps) {
       if (i === 0 || i === nWps - 1) {
         // here change the starting and ending icons
@@ -246,6 +209,6 @@ function crearRuta() {
 
 
 function onLocationError(e) {
-    alert(e.message);
-    controlBoton = 1;
-  }
+  alert(e.message);
+  controlBoton = 1;
+}
