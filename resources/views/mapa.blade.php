@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
   <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
   <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
   <link rel="stylesheet" href="{{ asset('css/style.css') }}"> 
     <script src="{{asset('js/funciones.js')}}"> </script>
 </head>
@@ -26,6 +27,45 @@
     <div id="checkboxes"></div>
   </div>
   <div id="map"></div>
+
+  <script>
+      $(document).ready(function () {
+    var token = localStorage.getItem("accessToken");
+    if (token !== null) {
+      //  $(location).prop('href', '/');
+    }
+
+    $("#botonSubmit").click(function () {
+        var username = $("#name").val();
+        var password = $("#password").val();
+
+        var data = {
+            "username": username,
+            "password": password,
+        }
+
+        $.ajax({
+            url: 'http://127.0.0.1:8002/api/v1/login',
+            type: 'POST',
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+            },
+            data: data,
+
+            success: function(data) {  
+                        localStorage.setItem("accessToken", data.access_token);
+                        $(location).prop('href', '/');
+                        
+                    },
+
+            error: function (data) {
+                alert("Credenciales invalidas");
+            }
+        });
+    });
+});
+    </script>
 </body>
 
 </html>
