@@ -30,8 +30,9 @@
     <script>
       $(document).ready(function () {
     var token = localStorage.getItem("accessToken");
-    if (token !== null) {
-      //  $(location).prop('href', '/');
+    if (token != null) {
+        $(location).prop('href', '/');
+       
     }
 
     $("#botonSubmit").click(function () {
@@ -57,7 +58,7 @@
                         localStorage.setItem("accessToken", data.token);
                         console.log(data);
                        // $(location).prop('href', '/');
-                     //  window.location.href = '/';
+                       window.location.href = '/';
                     },
 
             error: function (data) {

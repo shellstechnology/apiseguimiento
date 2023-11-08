@@ -28,6 +28,10 @@ Route::get('/set-test-cookie', function () {
 });
 
 Route::get('/', function () {
+    return view('choferes');
+});
+
+Route::get('/mapa', function () {
     return view('mapa');
 })->middleware(Autenticacion::class);
 
@@ -37,7 +41,7 @@ Route::get('/paqueteCamion', function () {
 
 Route::get('/rutaCamion', function () {
     return view('rutaCamion');
-})->name('rutaCamion')->middleware(Autenticacion::class);
+})->name('rutaCamion');
 
 Route::get('/PaqueteCamion', [paqueteController::class, 'cargarDatos'])->name('paqueteCamiom.cargarDatos')->middleware(Autenticacion::class);
 Route::post('/paqueteCamion', [paqueteController::class, 'cambiarEstado'])->name('redireccion.paqueteCamion')->middleware(Autenticacion::class);

@@ -29,42 +29,14 @@
   <div id="map"></div>
 
   <script>
-      $(document).ready(function () {
-    var token = localStorage.getItem("accessToken");
-    if (token !== null) {
-      //  $(location).prop('href', '/');
-    }
-
-    $("#botonSubmit").click(function () {
-        var username = $("#name").val();
-        var password = $("#password").val();
-
-        var data = {
-            "username": username,
-            "password": password,
-        }
-
-        $.ajax({
-            url: 'http://127.0.0.1:8002/api/v1/login',
-            type: 'POST',
-            headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json",
-            },
-            data: data,
-
-            success: function(data) {  
-                        localStorage.setItem("accessToken", data.access_token);
-                        $(location).prop('href', '/');
-                        
-                    },
-
-            error: function (data) {
-                alert("Credenciales invalidas");
-            }
+        $(document).ready(function(){
+            var token = localStorage.getItem("accessToken");
+            if(token == null)
+            $(location).prop('href', '/login');
+            
+            
         });
-    });
-});
+        
     </script>
 </body>
 

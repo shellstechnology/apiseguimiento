@@ -1,5 +1,6 @@
 @php
 $datos = session('paquete', []);
+$contador = 0;
 @endphp
 
 <table class="tabla">
@@ -26,7 +27,7 @@ $datos = session('paquete', []);
     @if($datos)
     @foreach ($datos as $paquete)
     <tr onclick="seleccionarFila(this)">
-    <td> <input type="checkbox" name="paquete_seleccionado[]" value="{{ $paquete['Id Paquete'] }}"
+    <td> <input id="paqueteSeleccionado{{$contador}}" type="checkbox" name="paquete_seleccionado[]" value="{{ $paquete['Id Paquete'] }}"
             @if ($paquete['Estado'] === 'entregado')    checked disabled @endif> </td>
             <td>{{ $paquete['Id Paquete'] }}</td>
             <td>{{ $paquete['Nombre del Paquete'] }}</td>
@@ -46,6 +47,9 @@ $datos = session('paquete', []);
             <td>{{ $paquete['updated_at'] }}</td>
             <td>{{ $paquete['deleted_at'] }}</td>
         </tr>
+        @php
+        $contador ++;
+        @endphp
     @endforeach
     @endif
 </table>

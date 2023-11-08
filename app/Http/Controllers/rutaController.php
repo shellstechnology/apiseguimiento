@@ -11,7 +11,7 @@ class rutaController extends Controller
 {
     public function cargarDatos()
     {
-        $response = Http::get('http://127.0.0.1:8006/api/ruta');
+        $response = Http::get('http://127.0.0.1:8003/api/ruta');
         $data = $response->json();
         Session::put('matriculaCamiones', $data);
         return redirect()->route('rutaCamion');
@@ -19,11 +19,11 @@ class rutaController extends Controller
 
     public function crearRuta(Request $request)
     {
-        $response = Http::get('http://127.0.0.1:8006/api/chofer', [
+        $response = Http::get('http://127.0.0.1:8003/api/chofer', [
             'matricula' => $request->input('idCamion')
         ]);
         $idUsuario = $response->json();
-        $response2 = Http::post('http://127.0.0.1:8006/api/ruta', [
+        $response2 = Http::post('http://127.0.0.1:8003/api/ruta', [
             'id_usuario' => $idUsuario
         ]);
         $coordenadas = [];
