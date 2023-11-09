@@ -28,7 +28,8 @@ $datos = session('coordenadas', []);
             }).addTo(map);
         }
         coordenadas = @json($datos);
-        if(coordenadas){
+        console.log(coordenadas);
+        if(coordenadas!=[]){
         map.locate({ setView: true, maxZoom: 16 });
         map.on('locationfound', onLocationFound);
         map.on('locationerror', onLocationError);
@@ -44,14 +45,14 @@ $datos = session('coordenadas', []);
         }
 
     var ico1 = L.icon({
-        iconUrl: "http://localhost:8009/img/Marker1.png",
+        iconUrl: "http://localhost:8006/img/Marker1.png",
         iconSize: [60, 60],
         iconAnchor: [30, 60],
         popupAnchor: [-3, -76]
     })
 
     var ico2 = L.icon({
-        iconUrl: "http://localhost:8009/img/Marker2.png",
+        iconUrl: "http://localhost:8006/img/Marker2.png",
         iconSize: [60, 60],
         iconAnchor: [30, 60],
         popupAnchor: [-3, -76]

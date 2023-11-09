@@ -19,11 +19,21 @@ class rutaController extends Controller
 
     public function crearRuta(Request $request)
     {
-        $response = Http::get('http://127.0.0.1:8003/api/chofer', [
+        $response = Http::withHeaders([
+            'X-CSRF-TOKEN'=>$request->input('X-CSRF-TOKEN'),
+            "Authorization"=>$request->input('Authorization'),
+            "Accept" =>$request->input('Accept'),
+            "Content-Type"=>$request->input('Content-Type'),
+        ])->get('http://127.0.0.1:8003/api/chofer', [
             'matricula' => $request->input('idCamion')
         ]);
         $idUsuario = $response->json();
-        $response2 = Http::post('http://127.0.0.1:8003/api/ruta', [
+        $response2 = Http::withHeaders([
+            'X-CSRF-TOKEN'=>$request->input('X-CSRF-TOKEN'),
+            "Authorization"=>$request->input('Authorization'),
+            "Accept" =>$request->input('Accept'),
+            "Content-Type"=>$request->input('Content-Type'),
+        ])->post('http://127.0.0.1:8003/api/ruta', [
             'id_usuario' => $idUsuario
         ]);
         $coordenadas = [];
@@ -39,8 +49,8 @@ class rutaController extends Controller
                     }
                 }
             }
-            Session::put('coordenadas', $coordenadas);
         }
+        Session::put('coordenadas', $coordenadas);
         return redirect()->route('rutaCamion');
     }
 }
