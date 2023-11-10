@@ -60,6 +60,7 @@
                         "Content-Type": "application/json",
                     },
                     success: function (data) {
+                        alert(data);
                         $(location).prop('href', '/rutaCamion');
                     }
 
@@ -89,6 +90,7 @@
                     },
                     data: JSON.stringify(dataFormulario),
                     success: function (data) {
+                        alert(data);
                         $(location).prop('href', '/rutaCamion');
                     }
                 });

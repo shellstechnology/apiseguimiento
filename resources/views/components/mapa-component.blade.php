@@ -29,16 +29,16 @@ $datos = session('coordenadas', []);
         }
         coordenadas = @json($datos);
         console.log(coordenadas);
-        if(coordenadas!=[]){
         map.locate({ setView: true, maxZoom: 16 });
         map.on('locationfound', onLocationFound);
         map.on('locationerror', onLocationError);
-        }
     });
 
     function onLocationFound(e) {
         ubicacion = e.latlng;
+        if(Array.isArray(coordenadas) && coordenadas.length > 0){
         calcularRuta();
+        }
     }
     function onLocationError(e) {
             alert(e.message);
@@ -137,3 +137,4 @@ $datos = session('coordenadas', []);
 }
 
 </script>
+

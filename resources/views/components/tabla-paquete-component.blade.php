@@ -1,6 +1,6 @@
 @php
 $datos = session('paquete', []);
-$contador = 0;
+Session::put('contador',0);
 @endphp
 
 <table class="tabla">
@@ -26,6 +26,9 @@ $contador = 0;
     </tr>
     @if($datos)
     @foreach ($datos as $paquete)
+    @php
+        $contador=Session::get('contador');
+    @endphp
     <tr onclick="seleccionarFila(this)">
     <td> <input id="paqueteSeleccionado{{$contador}}" type="checkbox" name="paquete_seleccionado[]" value="{{ $paquete['Id Paquete'] }}"
             @if ($paquete['Estado'] === 'entregado')    checked disabled @endif> </td>
@@ -48,7 +51,8 @@ $contador = 0;
             <td>{{ $paquete['deleted_at'] }}</td>
         </tr>
         @php
-        $contador ++;
+        $contador=$contador+1;
+        Session::put('contador',$contador);
         @endphp
     @endforeach
     @endif

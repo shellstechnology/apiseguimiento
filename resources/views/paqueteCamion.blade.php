@@ -38,7 +38,9 @@
     </div>
     </div>
     </div>
-
+@php
+$contador=Session::get('contador');
+@endphp
     <script>
         //checkeo si esta autenticado
         $(document).ready(function(){
@@ -57,6 +59,7 @@
                         "Content-Type" : "application/json",
                     },
                     success: function(data) {  
+                        alert(data);
                         $(location).prop('href', '/paqueteCamion');
                     }
                     
@@ -65,36 +68,53 @@
             
             //marco paquete como entregado autenticado
             $("#aceptar").click(function(){
-                var cantidadFilas=@json($contador)
-                var paqueteSeleccionado=[];
-                foreach(x=0;x<=cantidadFilas;x++){
-                    var id='paqueteSeleccionado'+x;
-                    paqueteSeleccionado = $("#"+id).val();
-                }
-            
+                var cantidadFilas=@json($contador);
+                console.log(cantidadFilas);
+                var paqueteSeleccionado = [];
+                var paqueteSeleccionado = [];
+                for (var x = 0; x <= cantidadFilas; x++) {
+                    var id = 'paqueteSeleccionado' + x;
+                    var checkbox = $("#" + id);
+                        if (checkbox.is(":checked")) {
+                        var valor = checkbox.val();
+                        paqueteSeleccionado.push(valor);
+                        }
+                    }
+
+
+
+            console.log(paqueteSeleccionado);
                 var dataFormulario = {
                     "paquete_seleccionado": paqueteSeleccionado,
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                    "Authorization": "Bearer " + localStorage.getItem("accessToken"),
+                    "Accept": "application/json",
+                    "Content-Type": "application/json",
 
                 }
-                jQuery.ajax({  
-                    url: '{{route('redireccion.paqueteCamion')}}',  
-                    type: 'POST',
+                $.ajax({
+                    url: '{{route('redireccion.paqueteCamion')}}',
+                    method: 'POST',
+                    async: true,
+                    crossDomain: true,
+                    dataType: 'json',
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                        "Authorization" : "Bearer " + localStorage.getItem("accessToken"),
-                        "Accept" : "application/json",
-                        "Content-Type" : "application/json",
+                        "Authorization": "Bearer " + localStorage.getItem("accessToken"),
+                        "Accept": "application/json",
+                        "Content-Type": "application/json",
                     },
-                    data: dataFormulario,
-                    success: function(data) {  
+                    data: JSON.stringify(dataFormulario),
+                     success: function(data) {  
+                        alert(data);
                         $(location).prop('href', '/paqueteCamion');
                     }
-                    
-                });  
+                });
             });
             
         });
         
     </script>
+    
 </body>
 </html>

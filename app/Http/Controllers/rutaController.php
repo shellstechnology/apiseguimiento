@@ -10,15 +10,19 @@ use Illuminate\Support\Facades\Session;
 class rutaController extends Controller
 {
     public function cargarDatos()
-    {
+    {try{
+        
         $response = Http::get('http://127.0.0.1:8003/api/ruta');
         $data = $response->json();
         Session::put('matriculaCamiones', $data);
-        return redirect()->route('rutaCamion');
+        return response()->json('Datos cargados correctamente');
+    }catch(\Exception $e){
+        return response()->json('Error:no se puedieron cargar los datos');
     }
+}
 
     public function crearRuta(Request $request)
-    {
+    {try{
         $response = Http::withHeaders([
             'X-CSRF-TOKEN'=>$request->input('X-CSRF-TOKEN'),
             "Authorization"=>$request->input('Authorization'),
@@ -51,6 +55,9 @@ class rutaController extends Controller
             }
         }
         Session::put('coordenadas', $coordenadas);
-        return redirect()->route('rutaCamion');
+        return response()->json('Datos de ubicaciones obtenidos correctamente');
+    }catch(\Exception $e){
+        return response()->json('Error, no se pudo calcular la ruta');
+    }
     }
 }
