@@ -42,31 +42,36 @@
 $contador=Session::get('contador');
 @endphp
     <script>
-        //checkeo si esta autenticado
         $(document).ready(function(){
             var token = localStorage.getItem("accessToken");
             if(token == null)
             $(location).prop('href', '/login');
-            
-            //cargo datos autenticado
+            var dataFormulario;
+            var userId=localStorage.getItem("userId");
             $("#cargarDatos").click(function(){
-                jQuery.ajax({  
+                dataFormulario = {
+                    "userId":userId
+                }
+                console.log(dataFormulario);
+                $.ajax({  
                     url: '{{route('paqueteCamiom.cargarDatos')}}',  
-                    type: 'GET',
+                    type: 'POST',
+                    async: true,
+                    crossDomain: true,
+                    dataType: 'json',
                     headers: {
-                        "Authorization" : "Bearer " + localStorage.getItem("accessToken"),
-                        "Accept" : "application/json",
-                        "Content-Type" : "application/json",
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                        "Authorization": "Bearer " + localStorage.getItem("accessToken"),
+                        "Accept": "application/json",
+                        "Content-Type": "application/json",
                     },
+                    data: JSON.stringify(dataFormulario),
                     success: function(data) {  
-                        alert(data);
-                        $(location).prop('href', '/paqueteCamion');
+                        console.log(data);
                     }
                     
                 });  
             });
-            
-            //marco paquete como entregado autenticado
             $("#aceptar").click(function(){
                 var cantidadFilas=@json($contador);
                 console.log(cantidadFilas);
@@ -81,9 +86,6 @@ $contador=Session::get('contador');
                         }
                     }
 
-
-
-            console.log(paqueteSeleccionado);
                 var dataFormulario = {
                     "paquete_seleccionado": paqueteSeleccionado,
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
@@ -106,7 +108,6 @@ $contador=Session::get('contador');
                     },
                     data: JSON.stringify(dataFormulario),
                      success: function(data) {  
-                        alert(data);
                         $(location).prop('href', '/paqueteCamion');
                     }
                 });

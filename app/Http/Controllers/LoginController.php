@@ -16,8 +16,6 @@ class LoginController extends Controller
             'name' => $request->input('username'),
            'password' => $request->input('password'),
         ]);
-      //  return redirect("/");
-      //  dd($response->json());
     }
 
     public function Logout(Request $request){

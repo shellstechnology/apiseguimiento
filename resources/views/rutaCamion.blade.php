@@ -34,10 +34,6 @@
                     <input type="hidden" name="identificador" id="identificador">
                     <button id="aceptar" type="submit" name="aceptar">Aceptar</button>
                 </div>
-
-
-                <button id="cargarDatos" type="submit" name="cargar">Cargar Datos</button>
-
             </div>
         </div>
     </div>
@@ -49,33 +45,15 @@
             var token = localStorage.getItem("accessToken");
             if (token == null)
                 $(location).prop('href', '/login');
-
-            $("#cargarDatos").click(function () {
-                jQuery.ajax({
-                    url: '{{route('rutaCamion.cargarDatos')}}',
-                    type: 'GET',
-                    headers: {
-                        "Authorization": "Bearer " + localStorage.getItem("accessToken"),
-                        "Accept": "application/json",
-                        "Content-Type": "application/json",
-                    },
-                    success: function (data) {
-                        alert(data);
-                        $(location).prop('href', '/rutaCamion');
-                    }
-
-                });
-            });
             $("#aceptar").click(function () {
-                var idCamion = $("#idCamion").val();
                 var dataFormulario = {
-                    "idCamion": idCamion,
+                    "userId":localStorage.getItem("userId"),
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                     "Authorization": "Bearer " + localStorage.getItem("accessToken"),
                     "Accept": "application/json",
                     "Content-Type": "application/json",
-
                 }
+                console.log(dataFormulario);
                 $.ajax({
                     url: '{{route('redireccion.rutaCamion')}}',
                     method: 'POST',

@@ -56,6 +56,7 @@
 
             success: function(data) {  
                         localStorage.setItem("accessToken", data.token);
+                        localStorage.setItem("userId", data.id);
                         console.log(data);
                        // $(location).prop('href', '/');
                        window.location.href = '/';

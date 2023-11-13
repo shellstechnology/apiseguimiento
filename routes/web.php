@@ -43,7 +43,7 @@ Route::get('/rutaCamion', function () {
     return view('rutaCamion');
 })->name('rutaCamion');
 
-Route::get('/PaqueteCamion', [paqueteController::class, 'cargarDatos'])->name('paqueteCamiom.cargarDatos')->middleware(Autenticacion::class);
+Route::post('/PaqueteCamion', [paqueteController::class, 'cargarDatos'])->name('paqueteCamiom.cargarDatos')->middleware(Autenticacion::class);
 Route::post('/paqueteCamion', [paqueteController::class, 'cambiarEstado'])->name('redireccion.paqueteCamion')->middleware(Autenticacion::class);
 
 Route::get('/RutaCamion', [rutaController::class, 'cargarDatos'])->name('rutaCamion.cargarDatos')->middleware(Autenticacion::class);

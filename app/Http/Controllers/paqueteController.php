@@ -8,10 +8,11 @@ use Session;
 
 class paqueteController extends Controller
 {
-    public function cargarDatos()
+    public function cargarDatos(Request $request)
     {
         try {
-            $response = Http::get('http://127.0.0.1:8003/api/paquetes');
+            $userId=$request->input("userId");
+            $response = Http::get("http://127.0.0.1:8003/api/paquetes/$userId");
             $data = $response->json();
             Session::put('paquete', $data[0]);
             Session::put('estadoPaquete', $data[1]);
