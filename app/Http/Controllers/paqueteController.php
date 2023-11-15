@@ -32,8 +32,9 @@ class paqueteController extends Controller
                 "Content-Type" => $request->input('Content-Type'),
             ])->post('http://127.0.0.1:8003/api/paquete', [
                         'paquetes' => $request->input('paquete_seleccionado'),
+                        'userId'=> $request->input('userId')
                     ]);
-            return response()->json('Estado cambiado correctamente');
+            return response()->json('Estados cambiados correctamente');
         } catch (\Exception $e) {
             return response()->json('Error, no se pudo cambiar los estados');
         }

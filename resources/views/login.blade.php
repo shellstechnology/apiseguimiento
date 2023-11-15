@@ -58,7 +58,6 @@
                         localStorage.setItem("accessTokenC", data.token);
                         localStorage.setItem("userId", data.id);
                         console.log(data);
-                       // $(location).prop('href', '/');
                        window.location.href = '/';
                     },
 

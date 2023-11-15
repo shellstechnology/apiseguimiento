@@ -31,7 +31,7 @@ Session::put('contador',0);
     @endphp
     <tr onclick="seleccionarFila(this)">
     <td> <input id="paqueteSeleccionado{{$contador}}" type="checkbox" name="paquete_seleccionado[]" value="{{ $paquete['Id Paquete'] }}"
-            @if ($paquete['Estado'] === 'entregado')    checked disabled @endif> </td>
+            @if ($paquete['Estado'] === 'entregado')    checked @endif> </td>
             <td>{{ $paquete['Id Paquete'] }}</td>
             <td>{{ $paquete['Nombre del Paquete'] }}</td>
             <td>{{ $paquete['Fecha de Entrega'] }}</td>
