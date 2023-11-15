@@ -30,7 +30,7 @@
 
   <script>
         $(document).ready(function(){
-            var token = localStorage.getItem("accessToken");
+            var token = localStorage.getItem("accessTokenC");
             if(token == null)
             $(location).prop('href', '/login');
             

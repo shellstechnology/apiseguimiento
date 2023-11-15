@@ -19,7 +19,6 @@ class Autenticacion
         public function handle(Request $request, Closure $next){
 
         $tokenHeader = [ "Authorization" => $request -> header("Authorization")];
-
         $response = Http::withHeaders($tokenHeader) -> get("http://localhost:8002/api/v1/validate");
         if($response -> successful())
             return $next($request);

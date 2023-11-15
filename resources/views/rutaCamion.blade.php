@@ -42,14 +42,14 @@
 
     <script>
         $(document).ready(function () {
-            var token = localStorage.getItem("accessToken");
+            var token = localStorage.getItem("accessTokenC");
             if (token == null)
                 $(location).prop('href', '/login');
             $("#aceptar").click(function () {
                 var dataFormulario = {
                     "userId":localStorage.getItem("userId"),
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                    "Authorization": "Bearer " + localStorage.getItem("accessToken"),
+                    "Authorization": "Bearer " + localStorage.getItem("accessTokenC"),
                     "Accept": "application/json",
                     "Content-Type": "application/json",
                 }
@@ -62,7 +62,7 @@
                     dataType: 'json',
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                        "Authorization": "Bearer " + localStorage.getItem("accessToken"),
+                        "Authorization": "Bearer " + localStorage.getItem("accessTokenC"),
                         "Accept": "application/json",
                         "Content-Type": "application/json",
                     },

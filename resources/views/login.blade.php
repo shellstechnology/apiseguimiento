@@ -29,7 +29,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <script>
       $(document).ready(function () {
-    var token = localStorage.getItem("accessToken");
+    var token = localStorage.getItem("accessTokenC");
     if (token != null) {
         $(location).prop('href', '/');
        
@@ -41,6 +41,7 @@
         var formData = {
             "name": $("#username").val(),
             "password": $("#password").val(),
+            'aplicacion':'choferes'
         }
 
         $.ajax({
@@ -53,9 +54,8 @@
                 "Content-Type": "application/json",
             },
             data: JSON.stringify(formData),
-
             success: function(data) {  
-                        localStorage.setItem("accessToken", data.token);
+                        localStorage.setItem("accessTokenC", data.token);
                         localStorage.setItem("userId", data.id);
                         console.log(data);
                        // $(location).prop('href', '/');

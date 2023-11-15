@@ -28,7 +28,7 @@
 
     <script>
         $(document).ready(function(){
-            var token = localStorage.getItem("accessToken");
+            var token = localStorage.getItem("accessTokenC");
             if(token == null)
             $(location).prop('href', '/login');
             
@@ -37,7 +37,7 @@
                     url: '/paqueteCamion',  
                     type: 'GET',
                     headers: {
-                        "Authorization" : "Bearer " + localStorage.getItem("accessToken"),
+                        "Authorization" : "Bearer " + localStorage.getItem("accessTokenC"),
                         "Accept" : "application/json",
                         "Content-Type" : "application/json",
                     },
@@ -53,7 +53,7 @@
                     url: '/rutaCamion',  
                     type: 'GET',
                     headers: {
-                        "Authorization" : "Bearer " + localStorage.getItem("accessToken"),
+                        "Authorization" : "Bearer " + localStorage.getItem("accessTokenC"),
                         "Accept" : "application/json",
                         "Content-Type" : "application/json",
                     },

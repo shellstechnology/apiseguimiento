@@ -43,7 +43,7 @@ $contador=Session::get('contador');
 @endphp
     <script>
         $(document).ready(function(){
-            var token = localStorage.getItem("accessToken");
+            var token = localStorage.getItem("accessTokenC");
             if(token == null)
             $(location).prop('href', '/login');
             var dataFormulario;
@@ -61,13 +61,14 @@ $contador=Session::get('contador');
                     dataType: 'json',
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                        "Authorization": "Bearer " + localStorage.getItem("accessToken"),
+                        "Authorization": "Bearer " + localStorage.getItem("accessTokenC"),
                         "Accept": "application/json",
                         "Content-Type": "application/json",
                     },
                     data: JSON.stringify(dataFormulario),
                     success: function(data) {  
-                        console.log(data);
+                        alert(data);
+                        $(location).prop('href', '/paqueteCamion');
                     }
                     
                 });  
@@ -89,7 +90,7 @@ $contador=Session::get('contador');
                 var dataFormulario = {
                     "paquete_seleccionado": paqueteSeleccionado,
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                    "Authorization": "Bearer " + localStorage.getItem("accessToken"),
+                    "Authorization": "Bearer " + localStorage.getItem("accessTokenC"),
                     "Accept": "application/json",
                     "Content-Type": "application/json",
 
@@ -102,7 +103,7 @@ $contador=Session::get('contador');
                     dataType: 'json',
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                        "Authorization": "Bearer " + localStorage.getItem("accessToken"),
+                        "Authorization": "Bearer " + localStorage.getItem("accessTokenC"),
                         "Accept": "application/json",
                         "Content-Type": "application/json",
                     },
