@@ -14,6 +14,13 @@
 </head>
 
 <body>
+<button class="cerrarSesion" id="cerrarSesion">
+        <div class="rectangulo">
+            <div class="linea">
+                <div class="triangulo"></div>
+            </div>
+        </div>
+</button>
     <div class="principalBody">
         <div class="barraDeNavegacion">
             <a href="{{route('paqueteCamion')}}" class="itemSeleccionado"> Paquetes a Entregar</a>
@@ -138,6 +145,23 @@
                         });
                     }
                 });
+            });
+            $("#cerrarSesion").click(function(){
+                jQuery.ajax({  
+                    url: 'http://localhost:8002/api/v1/logout',  
+                    type: 'GET',
+                    headers: {
+                        "Authorization" : "Bearer " + localStorage.getItem("accessTokenC"),
+                        "Accept" : "application/json",
+                        "Content-Type" : "application/json",
+                    },
+                    success: function(data) {  
+                        localStorage.removeItem("accessTokenC");
+                        localStorage.removeItem("userId");
+                        $(location).prop('href', '/login');
+                    }
+                    
+                });  
             });
 
         });

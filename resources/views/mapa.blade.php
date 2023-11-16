@@ -32,9 +32,7 @@
         $(document).ready(function(){
             var token = localStorage.getItem("accessTokenC");
             if(token == null)
-            $(location).prop('href', '/login');
-            
-            
+            $(location).prop('href', '/login');        
         });
         
     </script>
